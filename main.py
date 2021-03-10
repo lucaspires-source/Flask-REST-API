@@ -8,7 +8,7 @@ api = Api(app)
 
 class HelloWorld(Resource):
     def get(self):
-        return{"Olá mundo"}
+        return{"data": "Olá mundo"}
 api.add_resource(HelloWorld, "/helloword")
 if __name__ == "__main__":
     app.run(debug=True)
