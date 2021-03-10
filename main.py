@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_restful import Api, Resource, reqparse, abort
+from flask_restful import Api, Resource, reqparse, abort,fields,marshal_with
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -26,8 +26,15 @@ video_put_args.add_argument("name", type=str, help="Name of the video", required
 video_put_args.add_argument("views", type=int, help="Views of the video", required=True)
 video_put_args.add_argument("likes", type=int, help="Likes of the video", required=True)
 
+resource_fields ={
+    'id':fields.Integer,
+    'name':fields.String,
+    'views':fields.Integer,
+    'likes':fields.Integer
+}
 
 class Video(Resource):
+    @marshal_with(resource_fields)
     def get(self, video_id):
         result = VideoModel.query.get(id=video_id)
         return 
